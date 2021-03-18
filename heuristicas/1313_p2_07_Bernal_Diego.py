@@ -22,11 +22,16 @@ class Solution2(StudentHeuristic):
     return "Marcia Ana"
 
   def evaluation_function(self, state: TwoPlayerGameState) -> float:
-    return randrange(5) + state.game.min_score
+    return min(randrange(5) + state.game.min_score, randrange(10))
 
 class Solution3(StudentHeuristic):
   def get_name(self) -> str:
     return "Zampa Teste"
 
   def evaluation_function(self, state: TwoPlayerGameState) -> float:
-    return randrange(7) + state.game.max_score
+    max = state.game.max_score
+    min = state.game.min_score
+    if(max + min != 0):
+      return (100*((max - min)/(max - min)))
+    else:
+      return 0
