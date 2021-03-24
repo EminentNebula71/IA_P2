@@ -14,7 +14,7 @@ class Solution1(StudentHeuristic):
     return "Elsa Polindo"
 
   def evaluation_function(self, state: TwoPlayerGameState) -> float:
-    return randrange(10)
+    return randrange(10) + state.game.min_score
 
 
 class Solution2(StudentHeuristic):
@@ -22,7 +22,11 @@ class Solution2(StudentHeuristic):
     return "Marcia Ana"
 
   def evaluation_function(self, state: TwoPlayerGameState) -> float:
-    return min(randrange(5) + state.game.min_score, randrange(10))
+    cont = 0
+    while (state.parent != None):
+      cont += 1
+      state = state.parent.clone()
+    return cont/2
 
 class Solution3(StudentHeuristic):
   def get_name(self) -> str:
@@ -32,6 +36,6 @@ class Solution3(StudentHeuristic):
     max = state.game.max_score
     min = state.game.min_score
     if(max + min != 0):
-      return (100*((max - min)/(max - min)))
+      return max+min
     else:
       return 0
