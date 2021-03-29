@@ -108,18 +108,18 @@ class Tournament(object):
                     for depth in range(1, self.__max_depth):
                         pl1 = Player(
                             name=name1,
-                            strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
+                            strategy=MinimaxAlphaBetaStrategy( # MinimaxAlphaBetaStrategy(
                                 heuristic=Heuristic(name=sh1.get_name(), evaluation_function=sh1.evaluation_function),
                                 max_depth_minimax=depth,
-                                verbose=0,
+                                verbose=1,
                             ),
                         )
                         pl2 = Player(
                             name=name2,
-                            strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
+                            strategy=MinimaxAlphaBetaStrategy( # MinimaxAlphaBetaStrategy(
                                 heuristic=Heuristic(name=sh2.get_name(), evaluation_function=sh2.evaluation_function),
                                 max_depth_minimax=depth,
-                                verbose=0,
+                                verbose=1,
                             ),
                         )
 
@@ -131,15 +131,15 @@ class Tournament(object):
                         strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
                             heuristic=Heuristic(name=sh1.get_name(), evaluation_function=sh1.evaluation_function),
                             max_depth_minimax=depth,
-                            verbose=0,
+                            verbose=1,
                         ),
                     )
                     pl2 = Player(
                         name=name2,
                         strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
-                            heuristic=Heuristic(name=sh2.get_name(), evaluation_function=sh2.evaluation_function),
+                            heuristic=Heuristic(name=sh1.get_name(), evaluation_function=sh1.evaluation_function),
                             max_depth_minimax=depth,
-                            verbose=0,
+                            verbose=1,
                         ),
                     )
 
