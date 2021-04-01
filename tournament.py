@@ -9,6 +9,7 @@ from __future__ import annotations  # For Python 3.7
 import inspect  # for dynamic members of a module
 import os
 import sys
+import time
 from abc import ABC
 from importlib import find_loader, import_module, util
 from typing import Callable, Tuple
@@ -85,6 +86,7 @@ class Tournament(object):
     scores = dict()
     totals = dict()
     name_mapping = dict()
+    start_time = time.time()
     for student1 in student_strategies:
       strats1 = student_strategies[student1]
       for student2 in student_strategies:
@@ -128,22 +130,23 @@ class Tournament(object):
                     depth=self.__max_depth
                     pl1 = Player(
                         name=name1,
-                        strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
+                        strategy=MinimaxAlphaBetaStrategy( # MinimaxAlphaBetaStrategy(
                             heuristic=Heuristic(name=sh1.get_name(), evaluation_function=sh1.evaluation_function),
                             max_depth_minimax=depth,
-                            verbose=1,
+                            verbose=0,
                         ),
                     )
                     pl2 = Player(
                         name=name2,
-                        strategy=MinimaxStrategy( # MinimaxAlphaBetaStrategy(
+                        strategy=MinimaxAlphaBetaStrategy( # MinimaxAlphaBetaStrategy(
                             heuristic=Heuristic(name=sh1.get_name(), evaluation_function=sh1.evaluation_function),
                             max_depth_minimax=depth,
-                            verbose=1,
+                            verbose=0,
                         ),
                     )
 
                     self.__single_run(player1_first, pl1, name1, pl2, name2, scores, totals)
+    print("--- Minimax con poda %s seconds ---" % (time.time() - start_time))
     return scores, totals, name_mapping
 
   def __single_run(self, player1_first: bool, pl1: Player, name1: str, pl2: Player, name2: str, scores: dict, totals: dict):

@@ -49,56 +49,56 @@ class Heuristic3(StudentHeuristic):
 
 def create_match(player1: Player, player2: Player) -> TwoPlayerMatch:
 
-    # dim_board = 3
+    dim_board = 3
 
-    # initial_board = np.zeros((dim_board, dim_board))
-    # initial_player = player1
-
-    # game = TicTacToe(
-    #     player1=player1,
-    #     player2=player2,
-    #     dim_board=dim_board,
-    # )
-
-    # game_state = TwoPlayerGameState(
-    #     game=game,
-    #     board=initial_board,
-    #     initial_player=initial_player,
-    # )
-
-    # return TwoPlayerMatch(game_state, max_sec_per_move=1000, gui=False)
-    dim_board = 8
-
-    initial_board = None
-
+    initial_board = np.zeros((dim_board, dim_board))
     initial_player = player1
 
-    game = Reversi(
-
+    game = TicTacToe(
         player1=player1,
-
         player2=player2,
-
-        height=dim_board,
-
-        width=dim_board
-
+        dim_board=dim_board,
     )
 
     game_state = TwoPlayerGameState(
-
         game=game,
-
         board=initial_board,
-
         initial_player=initial_player,
-
     )
+
     return TwoPlayerMatch(game_state, max_sec_per_move=1000, gui=False)
+    # dim_board = 8
+
+    # initial_board = None
+
+    # initial_player = player1
+
+    # game = Reversi(
+
+    #     player1=player1,
+
+    #     player2=player2,
+
+    #     height=dim_board,
+
+    #     width=dim_board
+
+    # )
+
+    # game_state = TwoPlayerGameState(
+
+    #     game=game,
+
+    #     board=initial_board,
+
+    #     initial_player=initial_player,
+
+    # )
+    # return TwoPlayerMatch(game_state, max_sec_per_move=1000, gui=False)
 
 
 tour = Tournament(max_depth=3, init_match=create_match)
-strats = {'opt1': [Heuristic3]} #tour.load_strategies_from_folder(folder="heuristicas", max_strat=3)
+strats = tour.load_strategies_from_folder(folder="heuristicas", max_strat=3)#{'opt1': [Heuristic1], 'opt2': [Heuristic2], 'opt3': [Heuristic3]} 
 n = 5
 scores, totals, names = tour.run(
     student_strategies=strats,
